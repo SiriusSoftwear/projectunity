@@ -7,7 +7,7 @@ charset=characters+numbers+symbols
 PasswordRange=25
 aplength=5
 duplicateRange=5
-amount=5
+amount=10
 amount_rules=1000
 def LowercaseLetters():
     return 'l'
@@ -63,8 +63,10 @@ def TruncateWord():
     return "'"+str(randint(0,PasswordRange))
 def ReplaceCharWithChar():
     rule="s"+charset[randint(0,len(charset)-1)]+charset[randint(0,len(charset)-1)]
+    return rule
 def PurgeChar():
     rule='@'+charset[randint(0,len(charset)-1)]
+    return rule
 def DuplicateFirstChar():
     return "z"+str(randint(0,duplicateRange))
 def DuplicateLastChar():
@@ -82,7 +84,7 @@ def GenerateRandomRules():
             if(rules.count(rule)==0):
                 rules.append(rule)
         SaveRulesToFile(str(m),rules)
-        
+
 
 def SaveRulesToFile(name,thelist):
     thefile=open('rr/'+name+'.rule','w')
@@ -91,6 +93,8 @@ def SaveRulesToFile(name,thelist):
 def ReturnRandomRule():
     rule=random.choice(methods)()
     return rule
-    
-GenerateRandomRules()
-    
+def ReturnRandomRule2():
+    rand=randint(0,len(methods)-1)
+    print(str(rand))
+    rule=methods[rand]()
+    print(rule)
